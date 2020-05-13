@@ -32,6 +32,7 @@ class archive:public Program {
 	int code = 256;
 public:
 	void read_data();
+	void read_data_2();
 	void init_dict();
 	void out_dict();
 	void compress();

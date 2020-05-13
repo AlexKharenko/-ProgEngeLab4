@@ -41,6 +41,16 @@ void archive::read_data() {
 	in.close();
 }
 
+void archive::read_data_2() {
+	fstream in(get_name_in());
+	while (!in.eof()) {
+		int temp;
+		in >> temp;
+		output.push_back(temp);
+	}
+	in.close();
+}
+
 void archive::init_dict() {
 	for (int i = 0; i <= 255; i++) {
 		string ch = "";
@@ -101,5 +111,32 @@ void archive::compress() {
 	cout << endl;
 }
 void archive::decompress() {
-	
+	unordered_map<int, string> table;
+	for (int i = 0; i <= 255; i++) {
+		string ch = "";
+		ch += char(i);
+		table[i] = ch;
+	}
+	int old = output[0], n;
+	string s = table[old];
+	string c = "";
+	c += s[0];
+	cout << s;
+	int count = 256;
+	for (int i = 0; i < output.size() - 1; i++) {
+		n = output[i + 1];
+		if (table.find(n) == table.end()) {
+			s = table[old];
+			s = s + c;
+		}
+		else {
+			s = table[n];
+		}
+		cout << s;
+		c = "";
+		c += s[0];
+		table[count] = table[old] + c;
+		count++;
+		old = n;
+	}
 }
