@@ -1,4 +1,9 @@
-﻿  ProgEngeLab4.cpp
-  func.cpp
+﻿  func.cpp
+D:\Laba4\ProgEngeLab4\func.cpp(71,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Laba4\ProgEngeLab4\func.cpp(84,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Laba4\ProgEngeLab4\func.cpp(86,21): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Laba4\ProgEngeLab4\func.cpp(107,20): warning C4018: <: несоответствие типов со знаком и без знака
+  ProgEngeLab4.cpp
   Создание кода...
-  ProgEngeLab4.vcxproj -> C:\Users\Семья\Desktop\Alexey\Учёба\GitHub\ProgEngeLab4\Debug\ProgEngeLab4.exe
+D:\Laba4\ProgEngeLab4\func.cpp(126,20): warning C4018: <: несоответствие типов со знаком и без знака
+  ProgEngeLab4.vcxproj -> D:\Laba4\ProgEngeLab4\Debug\ProgEngeLab4.exe
