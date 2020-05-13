@@ -11,25 +11,30 @@ class Program {
 	bool work;
 	string name_func;
 	string name_in =".\\";
-	string name_out = ".\\";
-	vector <string> data;
+	string name_out;//= ".\\";
 public:
 	void set_name_func(char* argv);
 	void set_name_in(char* name);
 	void set_name_out(char* name);
+	string get_name_in();
+	string get_name_out();
 	string get_name_func();
 	void set_work(int argc);
 	bool get_work();
-	void read_data();
-	vector<string> get_data();
 	void out_f_in_out();
 };
 
 class archive:public Program {
+	vector <string> data;
 	unordered_map<string, int> dictionary;
 	int size = 255;
+	vector<int> output;
+	int code = 256;
 public:
+	void read_data();
 	void init_dict();
 	void out_dict();
 	void compress();
+	void decompress();
+	void write_compress_output_file();
 };

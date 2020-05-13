@@ -12,6 +12,12 @@ void Program::set_name_out(char* name) {
 string Program::get_name_func() {
 	return name_func;
 }
+string Program::get_name_in() {
+	return name_in;
+}
+string Program::get_name_out() {
+	return name_out;
+}
 void Program::out_f_in_out() {
 	cout << name_func << " " << name_in << " " << name_out << endl;
 }
@@ -25,22 +31,16 @@ void Program::set_work(int argc){
 bool Program::get_work() {
 	return work;
 }
-void Program::read_data() {
-	fstream out(name_out);
-	int i = 0;
-	while (!out.eof()) {
-		out >> data[i];
-		i++;
+void archive::read_data() {
+	fstream in(get_name_in());
+	while (!in.eof()) {
+		string temp;
+		in >> temp;
+		data.push_back(temp);
 	}
-	for (int j=0 ;j< data.size();j++)
-	{
-		cout << data[j] << " ";
-	}
-	cout << endl;
+	in.close();
 }
-vector<string> Program::get_data() {
 
-}
 void archive::init_dict() {
 	for (int i = 0; i <= 255; i++) {
 		string ch = "";
@@ -56,6 +56,50 @@ void archive::out_dict() {
 	}
 	cout << endl;
 }
+void archive::write_compress_output_file() {
+	fstream out(get_name_out());
+	for (int i = 0; i < output.size(); i++)
+	{
+		/*if (i == 1) {
+			out << output[i]<<" ";
+			break;
+		}*/
+		out << output[i]<<" ";
+	}
+	out.close();
+}
 void archive::compress() {
+	string p = "", c = "";
+	p += data[0][0];
+	for (int k = 0; k < data.size(); k++)
+	{
+		for (int i = 0; i < data[k].length(); i++) {
+			if (i != data[k].length() - 1)
+				c += data[k][i + 1];
+			
+			if (dictionary.find(p + c) != dictionary.end()) {
+				p = p + c;
+			}
+			else {
+				cout << p << "\t" << dictionary[p] << "\t\t"
+					<< p + c << "\t" << code << endl;
+				output.push_back(dictionary[p]);
+				dictionary[p + c] = code;
+				code++;
+				p = c;
+			}
+			c = "";
+		}
+		cout << p << "\t" << dictionary[p] << endl;
+		output.push_back(dictionary[p]);
+	}
+	//write_compress_output_file();
+	for (int i = 0; i < output.size(); i++)
+	{
+		cout << output[i] << " ";
+	}
+	cout << endl;
+}
+void archive::decompress() {
 	
 }
