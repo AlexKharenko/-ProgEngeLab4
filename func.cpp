@@ -43,11 +43,18 @@ void archive::read_data() {
 
 void archive::read_data_2() {
 	fstream in(get_name_in());
+	int i = 0;
+	char* name;
 	while (!in.eof()) {
+		if (i == 0) {
+			in >> name;
+			i++;
+		}
 		int temp;
 		in >> temp;
 		output.push_back(temp);
 	}
+	set_name_out(name);
 	in.close();
 }
 
@@ -67,43 +74,67 @@ void archive::out_dict() {
 	cout << endl;
 }
 void archive::write_compress_output_file() {
-	fstream out(get_name_out());
+	ofstream out(get_name_out());
 	for (int i = 0; i < output.size(); i++)
 	{
-		/*if (i == 1) {
-			out << output[i]<<" ";
-			break;
-		}*/
+		if (i == 0) {
+			out << get_name_in() <<" ";
+			continue;
+		}
 		out << output[i]<<" ";
 	}
 	out.close();
 }
 void archive::compress() {
 	string p = "", c = "";
-	p += data[0][0];
-	for (int k = 0; k < data.size(); k++)
+	int k = 0;
+	p += data[k][0];
+	while(k!=data.size())
 	{
+		
 		for (int i = 0; i < data[k].length(); i++) {
-			if (i != data[k].length() - 1)
-				c += data[k][i + 1];
-			
+			if (i != data[k].length()-1) {
+					c += data[k][i + 1];
+			}
+			if (k!=data.size()-1 && i == data[k].length() - 1) {
+				c += "_";
+			}
 			if (dictionary.find(p + c) != dictionary.end()) {
 				p = p + c;
 			}
 			else {
-				cout << p << "\t" << dictionary[p] << "\t\t"
-					<< p + c << "\t" << code << endl;
-				output.push_back(dictionary[p]);
-				dictionary[p + c] = code;
-				code++;
-				p = c;
+				
+					cout << p << "\t" << dictionary[p] << "\t\t"
+						<< p + c << "\t" << code << endl;
+					output.push_back(dictionary[p]);
+					dictionary[p + c] = code;
+					code++;
+					p = c;
+				
 			}
 			c = "";
 		}
-		cout << p << "\t" << dictionary[p] << endl;
-		output.push_back(dictionary[p]);
+		k++;
+		c += data[k][0];
+		if (dictionary.find(p + c) != dictionary.end()) {
+			p = p + c;
+		}
+		else {
+			if (k != data.size()) {
+				cout << p << "\t" << dictionary[p] << "\t\t"
+					<< p + c << "\t" << code << endl;
+					output.push_back(dictionary[p]);
+					dictionary[p + c] = code;
+					code++;
+					p = c;
+			}
+		}
+		c = "";
+		
 	}
-	//write_compress_output_file();
+	cout << p << "\t" << dictionary[p] << endl;
+	output.push_back(dictionary[p]);
+	write_compress_output_file();
 	for (int i = 0; i < output.size(); i++)
 	{
 		cout << output[i] << " ";
