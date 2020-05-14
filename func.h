@@ -16,6 +16,7 @@ public:
 	void set_name_func(char* argv);
 	void set_name_in(char* name);
 	void set_name_out(char* name);
+	void decom_out();
 	string get_name_in();
 	string get_name_out();
 	string get_name_func();

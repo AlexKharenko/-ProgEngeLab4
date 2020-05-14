@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-Test our program
-=======
-Test our program Test our program Test our program
->>>>>>> 0070d84f5a690195ff43ee66057918bb5f5c0092
+Test our program  

@@ -5,4 +5,4 @@ D:\Laba4\ProgEngeLab4\func.cpp(138,20): warning C4018: <: несоответст
   ProgEngeLab4.cpp
   Создание кода...
 D:\Laba4\ProgEngeLab4\func.cpp(157,20): warning C4018: <: несоответствие типов со знаком и без знака
-D:\Laba4\ProgEngeLab4\func.cpp(50): error C4700: использована неинициализированная локальная переменная "name"
+D:\Laba4\ProgEngeLab4\func.cpp(50): error C4700: использована неинициализированная локальная переменная "iname"

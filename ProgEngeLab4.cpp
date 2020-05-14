@@ -21,6 +21,7 @@ int main(int argc, char* argv[])
 		ARCH.set_name_in(argv[2]);
 		ARCH.init_dict();
 		ARCH.read_data_2();
+		ARCH.decom_out();
 		ARCH.decompress();
     }
    

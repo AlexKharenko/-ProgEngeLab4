@@ -1,11 +1,12 @@
 ﻿  func.cpp
-D:\Laba4\ProgEngeLab4\func.cpp(78,20): warning C4018: <: несоответствие типов со знаком и без знака
-D:\Laba4\ProgEngeLab4\func.cpp(95,21): warning C4018: <: несоответствие типов со знаком и без знака
-D:\Laba4\ProgEngeLab4\func.cpp(138,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Laba4\ProgEngeLab4\func.cpp(84,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Laba4\ProgEngeLab4\func.cpp(101,21): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Laba4\ProgEngeLab4\func.cpp(144,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Laba4\ProgEngeLab4\func.cpp(164,20): warning C4018: <: несоответствие типов со знаком и без знака
   ProgEngeLab4.cpp
-D:\Laba4\ProgEngeLab4\func.cpp(157,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Laba4\ProgEngeLab4\func.cpp(181,20): warning C4018: <: несоответствие типов со знаком и без знака
   Создание кода
   Previous IPDB not found, fall back to full compilation.
-D:\Laba4\ProgEngeLab4\func.cpp(50): error C4700: использована неинициализированная локальная переменная "name"
-  All 640 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-LINK : fatal error LNK1257: не удалось создать код
+  All 642 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  ProgEngeLab4.vcxproj -> D:\Laba4\ProgEngeLab4\Release\ProgEngeLab4.exe

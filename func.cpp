@@ -31,6 +31,11 @@ void Program::set_work(int argc){
 bool Program::get_work() {
 	return work;
 }
+
+void Program::decom_out() {
+	cout << "Getting out file " << name_out << " ..."<<endl;
+	cout << "Done";
+}
 void archive::read_data() {
 	fstream in(get_name_in());
 	while (!in.eof()) {
@@ -44,17 +49,18 @@ void archive::read_data() {
 void archive::read_data_2() {
 	fstream in(get_name_in());
 	int i = 0;
-	char* name;
+	int j = 256;
+	char *name = new char [j];
 	while (!in.eof()) {
 		if (i == 0) {
 			in >> name;
 			i++;
+			set_name_out(name);
 		}
 		int temp;
 		in >> temp;
 		output.push_back(temp);
 	}
-	set_name_out(name);
 	in.close();
 }
 
@@ -97,7 +103,7 @@ void archive::compress() {
 					c += data[k][i + 1];
 			}
 			if (k!=data.size()-1 && i == data[k].length() - 1) {
-				c += "_";
+				c += " ";
 			}
 			if (dictionary.find(p + c) != dictionary.end()) {
 				p = p + c;
@@ -151,8 +157,9 @@ void archive::decompress() {
 	int old = output[0], n;
 	string s = table[old];
 	string c = "";
+	string str;
 	c += s[0];
-	cout << s;
+	str += s;
 	int count = 256;
 	for (int i = 0; i < output.size() - 1; i++) {
 		n = output[i + 1];
@@ -163,11 +170,15 @@ void archive::decompress() {
 		else {
 			s = table[n];
 		}
-		cout << s;
+		str += s;
 		c = "";
 		c += s[0];
 		table[count] = table[old] + c;
 		count++;
 		old = n;
+	}
+	fstream out(get_name_out());
+	for (int i = 0; i < str.size(); i++) {
+		out << str[i];
 	}
 }
