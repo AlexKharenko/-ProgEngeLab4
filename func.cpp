@@ -177,8 +177,10 @@ void archive::decompress() {
 		count++;
 		old = n;
 	}
-	fstream out(get_name_out());
+	string name = get_name_out();
+	ofstream out(name);
 	for (int i = 0; i < str.size(); i++) {
 		out << str[i];
 	}
+	out.close();
 }
