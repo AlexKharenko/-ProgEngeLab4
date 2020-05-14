@@ -31,17 +31,26 @@ void Program::set_work(int argc){
 bool Program::get_work() {
 	return work;
 }
-
+void Program::com_out() {
+	cout << "Compresing..... " << name_in << " ..... in ..... "<< name_out << endl;
+	cout << "Done"<<endl;
+}
 void Program::decom_out() {
 	cout << "Getting out file " << name_out << " ..."<<endl;
-	cout << "Done";
+	cout << "Done" << endl;
 }
 void archive::read_data() {
 	fstream in(get_name_in());
+	int i = 0;
 	while (!in.eof()) {
 		string temp;
 		in >> temp;
-		data.push_back(temp);
+		if (i == 0) {
+			data += temp;
+			i++;
+		}
+		else
+			data += " " + temp;
 	}
 	in.close();
 }
@@ -81,71 +90,35 @@ void archive::out_dict() {
 }
 void archive::write_compress_output_file() {
 	ofstream out(get_name_out());
-	for (int i = 0; i < output.size(); i++)
+	for (int i = 0; i < output.size()+1; i++)
 	{
 		if (i == 0) {
 			out << get_name_in() <<" ";
 			continue;
 		}
-		out << output[i]<<" ";
+		out << output[i-1]<<" ";
 	}
 	out.close();
 }
 void archive::compress() {
 	string p = "", c = "";
-	int k = 0;
-	p += data[k][0];
-	while(k!=data.size())
-	{
-		
-		for (int i = 0; i < data[k].length(); i++) {
-			if (i != data[k].length()-1) {
-					c += data[k][i + 1];
-			}
-			if (k!=data.size()-1 && i == data[k].length() - 1) {
-				c += " ";
-			}
-			if (dictionary.find(p + c) != dictionary.end()) {
-				p = p + c;
-			}
-			else {
-				
-					cout << p << "\t" << dictionary[p] << "\t\t"
-						<< p + c << "\t" << code << endl;
-					output.push_back(dictionary[p]);
-					dictionary[p + c] = code;
-					code++;
-					p = c;
-				
-			}
-			c = "";
-		}
-		k++;
-		c += data[k][0];
+	p += data[0];
+	for (int i = 0; i < data.length(); i++) {
+		if (i != data.length() - 1)
+			c += data[i + 1];
 		if (dictionary.find(p + c) != dictionary.end()) {
 			p = p + c;
 		}
 		else {
-			if (k != data.size()) {
-				cout << p << "\t" << dictionary[p] << "\t\t"
-					<< p + c << "\t" << code << endl;
-					output.push_back(dictionary[p]);
-					dictionary[p + c] = code;
-					code++;
-					p = c;
-			}
+			output.push_back(dictionary[p]);
+			dictionary[p + c] = code;
+			code++;
+			p = c;
 		}
 		c = "";
-		
 	}
-	cout << p << "\t" << dictionary[p] << endl;
 	output.push_back(dictionary[p]);
 	write_compress_output_file();
-	for (int i = 0; i < output.size(); i++)
-	{
-		cout << output[i] << " ";
-	}
-	cout << endl;
 }
 void archive::decompress() {
 	unordered_map<int, string> table;

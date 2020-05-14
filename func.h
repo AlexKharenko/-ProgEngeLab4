@@ -17,6 +17,7 @@ public:
 	void set_name_in(char* name);
 	void set_name_out(char* name);
 	void decom_out();
+	void com_out();
 	string get_name_in();
 	string get_name_out();
 	string get_name_func();
@@ -26,7 +27,7 @@ public:
 };
 
 class archive:public Program {
-	vector <string> data;
+	string data;
 	unordered_map<string, int> dictionary;
 	int size = 255;
 	vector<int> output;

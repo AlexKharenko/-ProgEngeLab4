@@ -15,6 +15,7 @@ int main(int argc, char* argv[])
         ARCH.set_name_out(argv[2]);
 		ARCH.init_dict();
 		ARCH.read_data();
+        ARCH.com_out();
 		ARCH.compress();
     }
     else if(ARCH.get_name_func() == "--decompress"){
